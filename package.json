@@ -1,0 +1,19 @@
+{
+  "name": "bootleg-slack-backup",
+  "version": "1.0.0",
+  "description": "Headless browser based backup of Slack chanenls (free or paid)",
+  "main": "index.js",
+  "author": "Alex Wendland <me@alexwendland.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn build && node build/index.js",
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "puppeteer": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^2.0.1",
+    "typescript": "^3.8.3"
+  }
+}
