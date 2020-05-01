@@ -1,3 +1,8 @@
+<div align="center">
+  <img src="readme/banner.jpg" alt="Woman using a photocopier to make a copy of a piece of paper with the Slack logo on it" width="600">
+  <br>
+</div>
+
 # Bootleg Slack Backup (Free and Paid)
 
 Headless browser based backup of Slack chanenls (free or paid).
