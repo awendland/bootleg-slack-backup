@@ -8,18 +8,20 @@ enum LogLevel {
 
 type LogLevelStr = keyof typeof LogLevel
 
-let logLevel: LogLevel = LogLevel.ERROR;
+let logLevel: LogLevel = LogLevel.ERROR
 
 export const setLevelByString = (strLevel: string, silent = false) => {
   const level: LogLevel | undefined = LogLevel[strLevel as LogLevelStr]
   if (!silent && typeof level === "undefined") {
-    const validIds = Object.keys(LogLevel).join(', ')
-    throw new Error(`Invalid LogLevel specified: unknown level '${strLevel}. Valid identifiers: ${validIds}'`)
+    const validIds = Object.keys(LogLevel).join(", ")
+    throw new Error(
+      `Invalid LogLevel specified: unknown level '${strLevel}. Valid identifiers: ${validIds}'`
+    )
   }
   setLevel(level)
 }
 
-export const setLevel = (level: LogLevel) => logLevel = level
+export const setLevel = (level: LogLevel) => (logLevel = level)
 
 export const error = (...args: any[]) => {
   if (logLevel >= LogLevel.ERROR) console.error(...args)

@@ -1,7 +1,7 @@
 {
   "name": "bootleg-slack-backup",
-  "version": "1.0.0",
-  "description": "Headless browser based backup of Slack chanenls (free or paid)",
+  "version": "0.1.0",
+  "description": "Headless browser based backup of Slack channels (free or paid)",
   "main": "index.js",
   "author": "Alex Wendland <me@alexwendland.com>",
   "license": "MIT",

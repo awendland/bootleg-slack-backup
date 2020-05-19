@@ -1,11 +1,13 @@
+<!-- markdownlint-disable MD033 -->
 <div align="center">
   <img src="readme/banner.jpg" alt="Woman using a photocopier to make a copy of a piece of paper with the Slack logo on it" width="600">
   <br>
 </div>
+<!-- markdownlint-restore -->
 
 # Bootleg Slack Backup (Free and Paid)
 
-Headless browser based backup of Slack chanenls (free or paid).
+Headless browser based backup of Slack channels (free or paid).
 
 ## Usage
 
@@ -13,16 +15,16 @@ Provide the following environment variables and then run `yarn start` (which wil
 
 Environment variables:
 
-* `WORKSPACE` - the subdomain for this slack team, such as `$WORKSPACE.slack.com`
-* `USER_EMAIL` - the email address you use to login
+- `WORKSPACE` - the subdomain for this slack team, such as `$WORKSPACE.slack.com`
+- `USER_EMAIL` - the email address you use to login
   `USER_PASSWORD` - the password you use to login (see `SlackPuppet.login` in `src/lib.ts` to see how these credentials are used)
   `CHANNELS` - a comma separated list of channels to save messages from, such as `general,random`
 
-Optionally, you can specify `LOG_LEVEL` as well, which can be set to `ERROR (default) | WARN | INFO | TRACE`. All logs will be printed to *stderr*.
+Optionally, you can specify `LOG_LEVEL` as well, which can be set to `ERROR (default) | WARN | INFO | TRACE`. All logs will be printed to _stderr_.
 
 ## Output
 
-Extracted messages will be printed to *stdout* as newline delimited JSON.
+Extracted messages will be printed to _stdout_ as newline delimited JSON.
 
 ### Example Prettified Output
 
@@ -62,4 +64,4 @@ NEWLINE
 
 ## TODO
 
-* 2020-04-30 - Execution is still inconsistent with several `waitFor` timeouts being triggered during a standard execution. A more rigorous review is required to ensure the correct selectors and reliable trigger/navigation mechanisms are being used (e.g. using `.focus()` and `keyboard.press('Enter')` instead of `.click()`, which might be occluded by a popup element).
+- 2020-04-30 - Execution is still inconsistent with several `waitFor` timeouts being triggered during a standard execution. A more rigorous review is required to ensure the correct selectors and reliable trigger/navigation mechanisms are being used (e.g. using `.focus()` and `keyboard.press('Enter')` instead of `.click()`, which might be occluded by a popup element).
