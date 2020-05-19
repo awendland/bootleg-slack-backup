@@ -38,7 +38,8 @@ type Message = {
 type ThreadedMessages = Message & {
   thread: Message[]
 }
-;(async () => {
+
+export const run = async () => {
   const browser = await launch({ headless: !process.env.DEBUG })
   try {
     const page = await browser.newPage()
@@ -91,4 +92,8 @@ type ThreadedMessages = Message & {
   } finally {
     await browser.close()
   }
-})()
+}
+
+if (require.main === module) {
+  run()
+}

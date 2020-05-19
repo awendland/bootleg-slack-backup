@@ -11,7 +11,7 @@ Headless browser based backup of Slack channels (free or paid).
 
 ## Usage
 
-Provide the following environment variables and then run `yarn start` (which will compile the TypeScript program in `src/` to a JavaScript target in `build/` and then will execute it).
+Provide the following environment variables and then run `yarn build` (which will compile the TypeScript program in `src/` to a JavaScript target in `build/`) and then `bin/bsa` which will execute it.
 
 Environment variables:
 

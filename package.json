@@ -6,7 +6,7 @@
   "author": "Alex Wendland <me@alexwendland.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn build && node build/index.js",
+    "start": "yarn build && bin/bsa",
     "build": "tsc --build"
   },
   "dependencies": {
