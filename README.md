@@ -18,40 +18,46 @@ Environment variables:
   `USER_PASSWORD` - the password you use to login (see `SlackPuppet.login` in `src/lib.ts` to see how these credentials are used)
   `CHANNELS` - a comma separated list of channels to save messages from, such as `general,random`
 
-## Example Output
+Optionally, you can specify `LOG_LEVEL` as well, which can be set to `ERROR (default) | WARN | INFO | TRACE`. All logs will be printed to *stderr*.
+
+## Output
+
+Extracted messages will be printed to *stdout* as newline delimited JSON.
+
+### Example Prettified Output
 
 ```json
-[
-  {
-    "id": "p112322022113300",
-    "user": "Alex",
-    "content": "Pigs are flying!",
-    "thread": [
-      {
-        "id": "p112322642113900?thread_ts=112322022.113300&cid=C028U",
-        "user": "Margaret",
-        "content": "What's that mean for hot dog sales?"
-      }
-    ]
-  },
-  {
-    "id": "p238393749114700",
-    "user": "jacob",
-    "content": "lorem ipsum yummy burger sandwich <a target=\"_blank\" class=\"c-link\" delay=\"150\" aria-describedby=\"slack-kit-tooltip\" href=\"https://slack-redir.net/link?url=https%3A%2F%2Fwww.statnews.com\" rel=\"noopener noreferrer\">https://www.statnews.com</a>",
-    "thread": [
-      {
-        "id": "p238393775115200?thread_ts=238393749.114700&cid=C028U",
-        "user": "Margaret",
-        "content": "Into the newsletter it goes!"
-      },
-      {
-        "id": "p238393785115400?thread_ts=238393749.114700&cid=C028U",
-        "user": "Margaret",
-        "content": "Thank you"
-      }
-    ]
-  }
-]
+{
+  "id": "p112322022113300",
+  "user": "Alex",
+  "content": "Pigs are flying!",
+  "thread": [
+    {
+      "id": "p112322642113900?thread_ts=112322022.113300&cid=C028U",
+      "user": "Margaret",
+      "content": "What's that mean for hot dog sales?"
+    }
+  ]
+}
+NEWLINE
+{
+  "id": "p238393749114700",
+  "user": "jacob",
+  "content": "lorem ipsum yummy burger sandwich <a target=\"_blank\" class=\"c-link\" delay=\"150\" aria-describedby=\"slack-kit-tooltip\" href=\"https://slack-redir.net/link?url=https%3A%2F%2Fwww.statnews.com\" rel=\"noopener noreferrer\">https://www.statnews.com</a>",
+  "thread": [
+    {
+      "id": "p238393775115200?thread_ts=238393749.114700&cid=C028U",
+      "user": "Margaret",
+      "content": "Into the newsletter it goes!"
+    },
+    {
+      "id": "p238393785115400?thread_ts=238393749.114700&cid=C028U",
+      "user": "Margaret",
+      "content": "Thank you"
+    }
+  ]
+}
+NEWLINE
 ```
 
 ## TODO

@@ -3,9 +3,12 @@ import { SlackPuppet } from './lib';
 import { installMouseHelper } from './install-mouse-helper';
 import * as Log from './log';
 
+if (process.env.LOG_LEVEL)
+  Log.setLevelByString(process.env.LOG_LEVEL)
+
 const { WORKSPACE, USER_EMAIL, USER_PASSWORD, CHANNELS } = process.env;
 if (!WORKSPACE || !USER_EMAIL || !USER_PASSWORD || !CHANNELS) {
-  console.log(`Missing environment variable:
+  Log.error(`Missing environment variable:
   WORKSPACE: "${WORKSPACE}"
   USER_EMAIL: "${USER_EMAIL}"
   USER_PASSWORD: "${USER_PASSWORD}"
@@ -39,40 +42,43 @@ type ThreadedMessages = Message & {
       await installMouseHelper(page);
 
     await page.goto(`https://${WORKSPACE}.slack.com`);
-    await page.screenshot({ path: 'page1.png' });
+    if (process.env.DEBUG) await page.screenshot({ path: 'debug-page1.png' });
 
     const slackPuppet = new SlackPuppet(page);
 
     await slackPuppet.login(USER_EMAIL!, USER_PASSWORD!);
-    await page.screenshot({ path: 'page2.png' });
+    if (process.env.DEBUG) await page.screenshot({ path: 'debug-page2.png' });
 
     for (const channel of CHANNELS!.split(',')) {
       const channelPuppet = await slackPuppet.openChannel(channel);
       Log.info(`Opened channel: ${channel}`)
       await channelPuppet.scrollToOldest();
-      Log.info(`- scrolled to top`)
-      const messages: ThreadedMessages[] = []
+      Log.trace(`- scrolled to top`)
       await channelPuppet.forAllMessages(async (msgElem, msgId, maybeThread) => {
+        Log.trace(`- message [${msgId}]`)
         try {
-          const message = await extractMsgInfo(page, msgElem) as ThreadedMessages;
-          message.thread = [];
+          const message: ThreadedMessages = {
+            ...(await extractMsgInfo(page, msgElem)),
+            thread: [],
+          }
           await maybeThread.open(async (threadPuppet) => {
+            Log.trace(`-- opened thread`)
             await threadPuppet.forAllMessages(async (threadMsgElem, threadMsgId) => {
+              Log.trace(`--- sub message [${threadMsgId}]`)
               if (threadMsgId !== msgId) {
                 message.thread.push(await extractMsgInfo(page, threadMsgElem));
               }
             })
           });
-          messages.push(message);
+          process.stdout.write(`${JSON.stringify(message)}\n`)
         } catch (e) {
           // FIXME unable to handle image only messages
-          console.error(e);
+          Log.warn(e);
         }
       })
-      console.log(JSON.stringify(messages, null, 2))
     }
   } catch (e) {
-    console.error(e);
+    Log.error(e);
   } finally {
     await browser.close();
   }
